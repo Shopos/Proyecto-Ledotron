@@ -64,4 +64,6 @@
     <string name="cambiar_estilo">Cambiar Estilo</string>
     <string name="guardar">guardar</string>
     <string name="brillo1">+ brillo</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cambiar_justificativo">Cambiar justificativo</string>
 </resources>

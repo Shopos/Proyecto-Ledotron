@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
@@ -63,15 +64,28 @@ class configuracionTablero() : AppCompatActivity() {
         val BotonPredeterminado = findViewById<Button>(R.id.predeterminadoBoton)
         val BotonMensaje = findViewById<Button>(R.id.VisualizarBoton)
         val BotonmasBrillo = findViewById<Button>(R.id.brilloBoton)
-        val listaJustificado = findViewById<Spinner>(R.id.listajustificado)
+        val BotonJustificado = findViewById<Button>(R.id.justificadoBoton)
+
+
+
+
+
+
+
+
+
 
 
 
 
         val mensaje = findViewById<EditText>(R.id.mensaje)
 
+        BotonJustificado.setOnClickListener {
+                BTS.outputStream.write(("*J~").toByteArray());
+
+        }
         BotonReset.setOnClickListener {
-            BTS.outputStream.write(("*R~").toByteArray());
+            //BTS.outputStream.write(("*R~").toByteArray());
         }
         BotonGuardado.setOnClickListener {
             BTS.outputStream.write(("*W~").toByteArray());
@@ -91,22 +105,6 @@ class configuracionTablero() : AppCompatActivity() {
         }
 
 
-
-
-        listaJustificado.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>?,
-                selectedItemView: View?,
-                position: Int,
-                id: Long
-            ) {
-
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // your code here
-            }
-        })
 
         rangoV.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{ // velocidad
 
@@ -139,8 +137,8 @@ class configuracionTablero() : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 if (seekBar != null) {
-                    valorTransicion.text = ((seekBar.progress*3000)/100).toString()
-                    val num:Int = (seekBar.progress*3000)/100;
+                    valorTransicion.text = ((seekBar.progress*500)/100).toString()
+                    val num:Int = (seekBar.progress*500)/100;
 
                     BTS.outputStream.write(("*S"+((num).toString()+"~")).toByteArray());
                 }

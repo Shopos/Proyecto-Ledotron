@@ -26,7 +26,7 @@
             <EditText
                 android:id="@+id/mensaje"
                 android:layout_width="233dp"
-                android:maxLength="10"
+                android:maxLength="20"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:layout_height="44dp" />
@@ -46,11 +46,20 @@
                 android:layout_marginBottom="10dp"
                 android:text="@string/posicion_texto" />
 
-            <Spinner
-                android:id="@+id/listajustificado"
-                android:layout_width="199dp"
+
+
+
+
+
+
+
+            <Button
+                android:id="@+id/justificadoBoton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                android:text="@string/cambiar_justificativo" />
+
 
 
             <Button
