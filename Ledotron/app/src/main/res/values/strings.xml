@@ -42,4 +42,26 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="tablero_led">Tablero LED</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipisicing_elit_suscipit_cum_distinctio_libero_maiores_assumenda_deleniti_doloribus_optio_delectus_veniam_nesciunt_reprehenderit_laborum_rerum_alias_eaque_amet_non_aperiam_eligendi_molestias">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit cum distinctio, libero maiores, assumenda, deleniti doloribus optio delectus veniam nesciunt reprehenderit laborum. Rerum alias eaque amet non aperiam. Eligendi, molestias?</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="todo">TODO</string>
+    <string name="todo1">TODO</string>
+    <string name="configure_el_bluetooth">configure el bluetooth</string>
+    <string name="dispositivo">dispositivo</string>
+    <string name="sdhfksjdgfksdgfdshjfhsdgfhjsdg" />
+    <string name="togglebutton">ToggleButton</string>
+    <string name="holadf">holadf</string>
+    <string name="animacion_e_s">Animacion E/S</string>
+    <string name="posicion_texto">Posicion Texto</string>
+    <string name="brillo">brillo</string>
+    <string name="transicion_e_s">Transicion E/S</string>
+    <string name="velocidad_de_escritura">Velocidad de escritura</string>
+    <string name="visualizar">Visualizar</string>
+    <string name="predeterminado">Predeterminado</string>
+    <string name="reiniciar">Reiniciar</string>
+    <string name="CambiarEstilo" />
+    <string name="cambiar_estilo">Cambiar Estilo</string>
+    <string name="guardar">guardar</string>
+    <string name="brillo1">+ brillo</string>
 </resources>
