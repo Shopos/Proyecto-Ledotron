@@ -16,6 +16,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.Spinner
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -66,13 +68,20 @@ class configuracionTablero() : AppCompatActivity() {
         val BotonmasBrillo = findViewById<Button>(R.id.brilloBoton)
         val BotonJustificado = findViewById<Button>(R.id.justificadoBoton)
 
+        val BotonAtras = findViewById<Button>(R.id.atras)
+
+        val tablerosim = findViewById<TableLayout>(R.id.tablerosimulacion)
 
 
 
 
 
 
+        BotonAtras.setOnClickListener {
+            val intent = Intent(this, opcionbluetooth::class.java)
+            startActivity(intent)
 
+        }
 
 
 
@@ -92,12 +101,28 @@ class configuracionTablero() : AppCompatActivity() {
         }
         BotonMensaje.setOnClickListener {
             BTS.outputStream.write(("*M"+mensaje.text+"~").toByteArray());
+
+
+
+            for (i in 0 until tablerosim.childCount) {
+                val row = tablerosim.getChildAt(i) as TableRow
+                // Recorrer columnas en la fila actual
+                for (j in 0 until row.childCount) {
+                    val cell = row.getChildAt(j) as TextView
+                    val text = cell.text.toString()
+                    // Hacer algo con el texto de cada celda
+                    println("Fila $i, Columna $j: $text")
+                }
+            }
+
         }
         BotonPredeterminado.setOnClickListener {
             BTS.outputStream.write(("*F~").toByteArray());
         }
+
+
         BotonEstilo.setOnClickListener {
-            BTS.outputStream.write(("*I~").toByteArray());
+            BTS.outputStream.write(("*I~").toByteArray()); // *H~
         }
 
         BotonmasBrillo.setOnClickListener {

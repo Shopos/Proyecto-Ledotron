@@ -25,10 +25,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="71dp"
-            android:layout_height="62dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/todo"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/descarga" />
 
         <TextView
             android:id="@+id/textView2"
@@ -49,11 +49,10 @@
             android:text="@string/configure_el_bluetooth" />
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/todo1"
-            tools:srcCompat="@drawable/ic_launcher_foreground" />
+            android:id="@+id/imageView3"
+            android:layout_width="199dp"
+            android:layout_height="216dp"
+            app:srcCompat="@drawable/bticon" />
 
         <LinearLayout
             android:layout_width="384dp"
@@ -64,15 +63,15 @@
                 android:id="@+id/dispositivo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_marginHorizontal="40dp"
+                android:gravity="center"
                 android:text="@string/dispositivo" />
 
             <Spinner
                 android:id="@+id/listabt"
-                android:layout_marginLeft="40dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp" />
 
 
         </LinearLayout>
@@ -81,6 +80,7 @@
 
     <Button
         android:id="@+id/iniciar"
+        android:backgroundTint="#9999CC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/iniciar"

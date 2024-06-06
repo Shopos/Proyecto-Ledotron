@@ -66,4 +66,7 @@
     <string name="brillo1">+ brillo</string>
     <string name="confirmar">Confirmar</string>
     <string name="cambiar_justificativo">Cambiar justificativo</string>
+    <string name="sihn"><![CDATA[<]]></string>
+    <string name="configuracion_del_mensaje">Configuracion del mensaje</string>
+    <string name="configuracion_del_mensaje2">Configuracion del mensaje</string>
 </resources>

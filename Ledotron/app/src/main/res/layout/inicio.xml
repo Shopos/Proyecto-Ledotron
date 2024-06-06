@@ -22,6 +22,12 @@
         app:layout_constraintVertical_bias="0.0">
 
 
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/descarga" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -51,9 +57,31 @@
             app:layout_constraintBottom_toTopOf="@+id/imageView2" />
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/led" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="147dp"
+                android:layout_height="119dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ardu" />
+        </LinearLayout>
     </LinearLayout>
 
+
     <Button
+        android:backgroundTint="#9999CC"
         android:id="@+id/iniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
