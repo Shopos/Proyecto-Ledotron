@@ -29,6 +29,8 @@
             app:srcCompat="@drawable/descarga" />
 
         <TextView
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

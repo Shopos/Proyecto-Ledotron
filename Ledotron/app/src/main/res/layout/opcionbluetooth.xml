@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,41 +32,52 @@
             app:srcCompat="@drawable/descarga" />
 
         <TextView
+
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tablero_led" />
 
         <View
+
             android:id="@+id/view"
             android:layout_width="wrap_content"
             android:layout_height="12dp"
             android:background="#9999CC" />
 
         <TextView
+            android:padding="10dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:id="@+id/solicitud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/configure_el_bluetooth" />
 
         <ImageView
+            android:layout_marginBottom="100dp"
             android:id="@+id/imageView3"
             android:layout_width="199dp"
             android:layout_height="216dp"
             app:srcCompat="@drawable/bticon" />
 
         <LinearLayout
+
             android:layout_width="384dp"
             android:layout_height="59dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/dispositivo"
-                android:layout_width="wrap_content"
+                android:layout_width="104dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="40dp"
                 android:gravity="center"
-                android:text="@string/dispositivo" />
+                android:text="@string/dispositivo"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/listabt"

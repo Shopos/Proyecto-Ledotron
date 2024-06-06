@@ -29,6 +29,8 @@
         </Button>
 
         <TextView
+            android:textSize="20dp"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/configuracion_del_mensaje2">
@@ -3662,6 +3664,7 @@
 
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -3693,6 +3696,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/TransicionTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -3722,6 +3726,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/velocidadTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
