@@ -318,7 +318,7 @@ class configuracionTablero() : AppCompatActivity() {
         val BotonPredeterminado = findViewById<Button>(R.id.predeterminadoBoton)
         val BotonMensaje = findViewById<Button>(R.id.VisualizarBoton)
         val BotonmasBrillo = findViewById<Button>(R.id.brilloBoton)
-        val BotonJustificado = findViewById<Button>(R.id.justificadoBoton)
+        //val BotonJustificado = findViewById<Button>(R.id.justificadoBoton)
         val BotonAtras = findViewById<Button>(R.id.atras)
         val tablerosim = findViewById<TableLayout>(R.id.tablerosimulacion)
 
@@ -369,7 +369,6 @@ class configuracionTablero() : AppCompatActivity() {
             override fun run() {
 
 
-
                 if((fusionmatriz?.size ?:  0) != 0){
                     for (i in 0 until tablerosim.childCount) {
                         val row = tablerosim.getChildAt(i) as TableRow
@@ -377,10 +376,8 @@ class configuracionTablero() : AppCompatActivity() {
                         for (j in 0 until row.childCount) {
                             val cell = row.getChildAt(j) as TextView
                             cell.setBackgroundColor(Color.parseColor("#000000"))
-
                         }
                     }
-
                     val aste = fusionmatriz
                     if (aste != null) {
                         var j = iniciofilalocal
@@ -426,11 +423,14 @@ class configuracionTablero() : AppCompatActivity() {
 
 
         val mensaje = findViewById<EditText>(R.id.mensaje)
-
+/*
         BotonJustificado.setOnClickListener {
                 BTS.outputStream.write(("*J~").toByteArray());
 
         }
+        */
+
+
         BotonReset.setOnClickListener {
             //BTS.outputStream.write(("*R~").toByteArray());
         }
