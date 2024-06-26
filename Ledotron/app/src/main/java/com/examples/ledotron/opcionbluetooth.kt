@@ -50,14 +50,14 @@ class opcionbluetooth : AppCompatActivity() {
             val btnEna =  Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             
 
-            //PedirPermiso(listaNombreBT,listaDireccionesBT,listaSpinner,bta)
+            PedirPermiso(listaNombreBT,listaDireccionesBT,listaSpinner,bta)
 
             botonconfig.setOnClickListener{
-                //PedirPermisoVincular(listaDireccionesBT,listaSpinner,bta )
+                PedirPermisoVincular(listaDireccionesBT,listaSpinner,bta )
 
                 val intent = Intent(this, configuracionTablero::class.java)
 
-                //intent.putExtra("valor", listaDireccionesBT.getItem(listaSpinner.selectedItemPosition));
+                intent.putExtra("valor", listaDireccionesBT.getItem(listaSpinner.selectedItemPosition));
                 startActivity(intent)
 
 

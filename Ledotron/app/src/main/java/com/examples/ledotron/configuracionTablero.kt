@@ -302,7 +302,7 @@ class configuracionTablero() : AppCompatActivity() {
 
         val bta = bluetoothManager.adapter as BluetoothAdapter
         val btnEna =  Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        //PedirPermisoVincular(intent.getStringExtra("valor").toString(),bta)
+        PedirPermisoVincular(intent.getStringExtra("valor").toString(),bta)
 
 
 
@@ -432,13 +432,13 @@ class configuracionTablero() : AppCompatActivity() {
 
 
         BotonReset.setOnClickListener {
-            //BTS.outputStream.write(("*R~").toByteArray());
+            BTS.outputStream.write(("*R~").toByteArray());
         }
         BotonGuardado.setOnClickListener {
             BTS.outputStream.write(("*W~").toByteArray());
         }
         BotonMensaje.setOnClickListener {
-            //BTS.outputStream.write(("*M"+mensaje.text+"~").toByteArray());
+            BTS.outputStream.write(("*M"+mensaje.text+"~").toByteArray());
 
             iniciofilalocal = iniciofila
             iniciocolumnalocal = iniciocolumna
