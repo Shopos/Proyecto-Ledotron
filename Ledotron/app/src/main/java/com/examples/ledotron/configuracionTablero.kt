@@ -1396,7 +1396,7 @@ class configuracionTablero() : AppCompatActivity() {
                     // Añadir las filas de la segunda matriz a la lista
                     if (filasCombinadas != null) {
                         filasCombinadas.add(" ")
-                        filasCombinadas.addAll(fusionmatrizaux.clone())p
+                        filasCombinadas.addAll(fusionmatrizaux.clone())
                         fusionmatriz = filasCombinadas.toTypedArray()
                     }
 
