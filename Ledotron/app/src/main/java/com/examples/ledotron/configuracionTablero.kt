@@ -1127,12 +1127,12 @@ class configuracionTablero() : AppCompatActivity() {
     var iniciocolumnalocal = iniciocolumna
 
     var  fusionmatriz = letras['H']
-
+    var reiniciarAnimacion = true
 
 
     lateinit var BTS: BluetoothSocket
-    var palabraUp = "ARRIBA"
-    var palabraDDown = "ABAJO"
+    var palabraUp = ""
+    var palabraDDown = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -1192,18 +1192,18 @@ class configuracionTablero() : AppCompatActivity() {
 
 
                     if (aste != null) {
+                        reiniciarAnimacion = true
                         var j = iniciofilalocal
                         var h = iniciofila
                         while((j  < tablerosim.childCount) && h < aste.size){
                             println(aste[h])
                             val row = tablerosim.getChildAt(j) as TableRow
                             var z = iniciocolumna
-                            if(iniciocolumnalocal >= row.childCount){
-                                iniciocolumnalocal = 0
-                            }
+
                             var i = iniciocolumnalocal
 
                             while((z  < row.childCount) && i < aste[h].length){
+                                reiniciarAnimacion = false
                                 val cell = row.getChildAt(z) as TextView
                                 if(aste[h][i] == '*'){
                                     cell.setBackgroundColor(Color.parseColor("#ff0000"))
@@ -1214,8 +1214,13 @@ class configuracionTablero() : AppCompatActivity() {
                             j++
                             h++
                         }
+                        if(reiniciarAnimacion){
+                            iniciocolumnalocal = 0
+                        }else{
+                            iniciocolumnalocal++
+                        }
                     }
-                    iniciocolumnalocal++
+
 
 
                 }
@@ -1303,6 +1308,7 @@ class configuracionTablero() : AppCompatActivity() {
 
                     // Añadir las filas de la segunda matriz a la lista
                     if (filasCombinadas != null) {
+                        filasCombinadas.add(" ")
                         filasCombinadas.addAll(fusionmatrizaux.clone())
                         fusionmatriz = filasCombinadas.toTypedArray()
                     }
@@ -1316,6 +1322,7 @@ class configuracionTablero() : AppCompatActivity() {
                 // Añadir las filas de la segunda matriz a la lista
                 if (filasCombinadas != null) {
                     if (fusionmatrizaux != null) {
+
                         filasCombinadas.addAll(fusionmatrizaux.clone())
                     }
                     fusionmatriz = filasCombinadas.toTypedArray()
@@ -1383,13 +1390,13 @@ class configuracionTablero() : AppCompatActivity() {
                                 fusionmatrizaux[j] += filas[j]
                             }
                         }
-
                     }
                     val filasCombinadas = fusionmatriz?.toMutableList()
 
                     // Añadir las filas de la segunda matriz a la lista
                     if (filasCombinadas != null) {
-                        filasCombinadas.addAll(fusionmatrizaux.clone())
+                        filasCombinadas.add(" ")
+                        filasCombinadas.addAll(fusionmatrizaux.clone())p
                         fusionmatriz = filasCombinadas.toTypedArray()
                     }
 
@@ -1437,7 +1444,32 @@ class configuracionTablero() : AppCompatActivity() {
 
 
         BotonEstilo.setOnClickListener {
-            BTS.outputStream.write(("*I~").toByteArray()); // *H~
+            BTS.outputStream.write(("*H~").toByteArray()); // *H~
+
+            if(palabraUp.length !=0){
+                fusionmatriz = letrasM[palabraUp[0]]?.clone()
+
+
+                val palabrasub = palabraUp.substring(1)
+                if (fusionmatriz != null) {
+
+                    for(letracola in palabrasub){
+                        val filas = letrasM[letracola]?.clone()
+
+
+                        if (filas != null) {
+                            for(j in filas.indices){
+                                fusionmatriz!![j] += filas[j]
+                            }
+                        }
+                    }
+                }
+            }else{
+                fusionmatriz = letrasM[' ']?.clone()
+            }
+
+
+
         }
 
 

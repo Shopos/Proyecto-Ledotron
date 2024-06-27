@@ -53,7 +53,7 @@ class opcionbluetooth : AppCompatActivity() {
             PedirPermiso(listaNombreBT,listaDireccionesBT,listaSpinner,bta)
 
             botonconfig.setOnClickListener{
-                PedirPermisoVincular(listaDireccionesBT,listaSpinner,bta )
+
 
                 val intent = Intent(this, configuracionTablero::class.java)
 

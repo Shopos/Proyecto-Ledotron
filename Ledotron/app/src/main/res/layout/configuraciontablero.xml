@@ -3651,7 +3651,7 @@
                 android:id="@+id/mensaje"
                 android:layout_width="233dp"
                 android:layout_height="44dp"
-                android:maxLength="20"
+                android:maxLength="100"
                 android:maxLines="1"
                 android:singleLine="true" />
 
@@ -3668,7 +3668,7 @@
                 android:id="@+id/mensaje2"
                 android:layout_width="233dp"
                 android:layout_height="44dp"
-                android:maxLength="20"
+                android:maxLength="100"
                 android:maxLines="1"
                 android:singleLine="true" />
 
