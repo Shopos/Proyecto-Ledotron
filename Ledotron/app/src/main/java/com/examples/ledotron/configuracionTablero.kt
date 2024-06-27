@@ -34,6 +34,728 @@ import java.util.UUID
 
 
 class configuracionTablero() : AppCompatActivity() {
+    private val letrasM = mapOf(
+        'A' to arrayOf(
+            "    ***    ",
+            "   *   *   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********* ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * "
+        ),
+        'B' to arrayOf(
+            " ********  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********  ",
+            "           "
+        ),
+        'C' to arrayOf(
+            "   ******* ",
+            "  *        ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            "  *        ",
+            "   ******* ",
+            "           ",
+            "           "
+        ),
+        'D' to arrayOf(
+            " ********  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********  ",
+            "           ",
+            "           "
+        ),
+        'E' to arrayOf(
+            " ********* ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********* ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********* ",
+            "           ",
+            "           "
+        ),
+        'F' to arrayOf(
+            " ********* ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********* ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            "           ",
+            "           "
+        ),
+        'G' to arrayOf(
+            "   ******* ",
+            "  *        ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *    **** ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *      * ",
+            "   ******  ",
+            "           ",
+            "           "
+        ),
+        'H' to arrayOf(
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********* ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "           ",
+            "           "
+        ),
+        'I' to arrayOf(
+            "    ***    ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "    ***    ",
+            "           ",
+            "           "
+        ),
+        'J' to arrayOf(
+            "       *** ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            "        *  ",
+            " *      *  ",
+            " *      *  ",
+            "  *    *   ",
+            "   ***     ",
+            "           ",
+            "           "
+        ),
+        'K' to arrayOf(
+            " *      *  ",
+            " *     *   ",
+            " *    *    ",
+            " *   *     ",
+            " *  *      ",
+            " * *       ",
+            " **        ",
+            " **        ",
+            " * *       ",
+            " *  *      ",
+            " *   *     ",
+            " *    *    ",
+            " *     *   ",
+            " *      *  ",
+            "           ",
+            "           "
+        ),
+        'L' to arrayOf(
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********* ",
+            "           ",
+            "           "
+        ),
+        'M' to arrayOf(
+            " *       * ",
+            " **     ** ",
+            " **     ** ",
+            " **     ** ",
+            " * *   * * ",
+            " * *   * * ",
+            " *  * *  * ",
+            " *  * *  * ",
+            " *   *   * ",
+            " *   *   * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "           ",
+            "           "
+        ),
+        'N' to arrayOf(
+            " *       * ",
+            " **      * ",
+            " **      * ",
+            " * *     * ",
+            " *  *    * ",
+            " *  *    * ",
+            " *   *   * ",
+            " *    *  * ",
+            " *    *  * ",
+            " *     * * ",
+            " *      ** ",
+            " *      ** ",
+            " *       * ",
+            " *       * ",
+            "           ",
+            "           "
+        ),
+        'O' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        'P' to arrayOf(
+            " ********  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********  ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            "           ",
+            "           "
+        ),
+        'Q' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *     * * ",
+            " *      ** ",
+            "  *     ** ",
+            "   ****  * ",
+            "           ",
+            "           "
+        ),
+        'R' to arrayOf(
+            " ********  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " ********  ",
+            " * *       ",
+            " *  *      ",
+            " *   *     ",
+            " *    *    ",
+            " *     *   ",
+            " *      *  ",
+            " *       * ",
+            " *        *",
+            "           ",
+            "           "
+        ),
+        'S' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *         ",
+            " *         ",
+            "  *        ",
+            "   ****    ",
+            "       *   ",
+            "        *  ",
+            "         * ",
+            "         * ",
+            " *       * ",
+            " *      *  ",
+            "  *****    ",
+            "           ",
+            "           "
+        ),
+        'T' to arrayOf(
+            " ********* ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "           ",
+            "           "
+        ),
+        'U' to arrayOf(
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        'V' to arrayOf(
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *   *   ",
+            "    * *    ",
+            "    * *    ",
+            "     *     ",
+            "           ",
+            "           "
+        ),
+        'W' to arrayOf(
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *   *   * ",
+            " *   *   * ",
+            " *  * *  * ",
+            "  * * * *  ",
+            "  * * * *  ",
+            "   *   *   ",
+            "           ",
+            "           "
+        ),
+        'X' to arrayOf(
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *   *   ",
+            "    * *    ",
+            "     *     ",
+            "     *     ",
+            "    * *    ",
+            "   *   *   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "           ",
+            "           "
+        ),
+        'Y' to arrayOf(
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *   *   ",
+            "    * *    ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "           ",
+            "           "
+        ),
+        'Z' to arrayOf(
+            " ********* ",
+            "         * ",
+            "        *  ",
+            "       *   ",
+            "      *    ",
+            "     *     ",
+            "    *      ",
+            "   *       ",
+            "  *        ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********* ",
+            "           ",
+            "           "
+        ),
+        '0' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *      ** ",
+            " *     * * ",
+            " *    *  * ",
+            " *   *   * ",
+            " *  *    * ",
+            " * *     * ",
+            " **      * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           "
+        ),
+        '1' to arrayOf(
+            "     *     ",
+            "    **     ",
+            "   * *     ",
+            "  *  *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "     *     ",
+            "  *******  ",
+            "           ",
+            "           "
+        ),
+        '2' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            "         * ",
+            "         * ",
+            "         * ",
+            "        *  ",
+            "       *   ",
+            "      *    ",
+            "     *     ",
+            "    *      ",
+            "   *       ",
+            "  *        ",
+            " ********* ",
+            "           ",
+            "           "
+        ),
+        '3' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            "         * ",
+            "         * ",
+            "         * ",
+            "   *****   ",
+            "         * ",
+            "         * ",
+            "         * ",
+            "         * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        '4' to arrayOf(
+            "       *   ",
+            "      **   ",
+            "     * *   ",
+            "    *  *   ",
+            "   *   *   ",
+            "  *    *   ",
+            " *     *   ",
+            " *     *   ",
+            " ********* ",
+            "       *   ",
+            "       *   ",
+            "       *   ",
+            "       *   ",
+            "       *   ",
+            "           ",
+            "           "
+        ),
+        '5' to arrayOf(
+            " ********* ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********  ",
+            "        *  ",
+            "         * ",
+            "         * ",
+            "         * ",
+            "         * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        '6' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *         ",
+            " *         ",
+            " *         ",
+            " ********  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        '7' to arrayOf(
+            " ********* ",
+            "        *  ",
+            "        *  ",
+            "       *   ",
+            "       *   ",
+            "      *    ",
+            "      *    ",
+            "     *     ",
+            "     *     ",
+            "    *      ",
+            "    *      ",
+            "   *       ",
+            "   *       ",
+            "  *        ",
+            "           ",
+            "           "
+        ),
+        '8' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        '9' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            " *       * ",
+            "  *******  ",
+            "         * ",
+            "         * ",
+            "         * ",
+            "         * ",
+            " *       * ",
+            "  *     *  ",
+            "   *****   ",
+            "           ",
+            "           "
+        ),
+        '_' to arrayOf(
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            " ********* ",
+            "           ",
+            "           "
+        ),
+        '.' to arrayOf(
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "    **     ",
+            "    **     ",
+            "           "
+        ),
+        ' ' to arrayOf(
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           ",
+            "           "
+        ),
+        '@' to arrayOf(
+            "   *****   ",
+            "  *     *  ",
+            " *       * ",
+            " *       * ",
+            " *   ****  ",
+            " *  *   *  ",
+            " *  *   *  ",
+            " *  *   *  ",
+            " *  *   *  ",
+            " *  *  **  ",
+            " *  * * *  ",
+            " *   * *   ",
+            " *         ",
+            "  *     *  ",
+            "   *****   ",
+            "           "
+        )
+    )
 
     private val letras = mapOf(
         'A' to arrayOf(
@@ -269,8 +991,135 @@ class configuracionTablero() : AppCompatActivity() {
             " *   ",
             " *   ",
             " *** "
+        ),
+        '0' to arrayOf(
+            " *** ",
+            " * * ",
+            " * * ",
+            " * * ",
+            " * * ",
+            " * * ",
+            " *** "
+        ),
+        '1' to arrayOf(
+            "  *  ",
+            " **  ",
+            "  *  ",
+            "  *  ",
+            "  *  ",
+            "  *  ",
+            " *** "
+        ),
+        '2' to arrayOf(
+            " *** ",
+            "   * ",
+            "   * ",
+            " *** ",
+            " *   ",
+            " *   ",
+            " *** "
+        ),
+        '3' to arrayOf(
+            " *** ",
+            "   * ",
+            "   * ",
+            " *** ",
+            "   * ",
+            "   * ",
+            " *** "
+        ),
+        '4' to arrayOf(
+            " * * ",
+            " * * ",
+            " * * ",
+            " *** ",
+            "   * ",
+            "   * ",
+            "   * "
+        ),
+        '5' to arrayOf(
+            " *** ",
+            " *   ",
+            " *   ",
+            " *** ",
+            "   * ",
+            "   * ",
+            " *** "
+        ),
+        '6' to arrayOf(
+            " *** ",
+            " *   ",
+            " *   ",
+            " *** ",
+            " * * ",
+            " * * ",
+            " *** "
+        ),
+        '7' to arrayOf(
+            " *** ",
+            "   * ",
+            "   * ",
+            "   * ",
+            "   * ",
+            "   * ",
+            "   * "
+        ),
+        '8' to arrayOf(
+            " *** ",
+            " * * ",
+            " * * ",
+            " *** ",
+            " * * ",
+            " * * ",
+            " *** "
+        ),
+        '9' to arrayOf(
+            " *** ",
+            " * * ",
+            " * * ",
+            " *** ",
+            "   * ",
+            "   * ",
+            " *** "
+        ),
+        '_' to arrayOf(
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            " *** "
+        ),
+        '.' to arrayOf(
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            " **  ",
+            " **  "
+        ),
+        ' ' to arrayOf(
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     "
+        ),
+        '@' to arrayOf(
+            " *** ",
+            " * * ",
+            " * * ",
+            " * * ",
+            " * **",
+            " * **",
+            " *** "
         )
     )
+
 
     var iniciocolumna = 0
     var iniciofila = 0
@@ -282,15 +1131,12 @@ class configuracionTablero() : AppCompatActivity() {
 
 
     lateinit var BTS: BluetoothSocket
-    var palabra = "HOLA"
-
+    var palabraUp = "ARRIBA"
+    var palabraDDown = "ABAJO"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
 
 
         setContentView(R.layout.configuraciontablero)
@@ -309,59 +1155,21 @@ class configuracionTablero() : AppCompatActivity() {
         val rangoT = findViewById<SeekBar>(R.id.TransicionSB)
         val valorTransicion = findViewById<TextView>(R.id.TransicionNumero)
         valorTransicion.text = rangoT.progress.toString()
-        val rangoV = findViewById<SeekBar>(R.id.VelocidadSB)
-        val valorVelocidad = findViewById<TextView>(R.id.velocidadNumero)
-        valorVelocidad.text = rangoV.progress.toString()
+        val rangoB = findViewById<SeekBar>(R.id.BrilloSB)
+
+        val valorBrillo = findViewById<TextView>(R.id.BrilloNumero)
+        valorBrillo.text = rangoB.progress.toString()
+
         val BotonEstilo = findViewById<Button>(R.id.estiloBoton)
         val BotonReset = findViewById<Button>(R.id.resetBoton)
         val BotonGuardado = findViewById<Button>(R.id.guardarBoton)
         val BotonPredeterminado = findViewById<Button>(R.id.predeterminadoBoton)
-        val BotonMensaje = findViewById<Button>(R.id.VisualizarBoton)
-        val BotonmasBrillo = findViewById<Button>(R.id.brilloBoton)
-        //val BotonJustificado = findViewById<Button>(R.id.justificadoBoton)
+        val BotonMensajeAbajo = findViewById<Button>(R.id.VisualizarBoton2)
+        val BotonMensajeArriba = findViewById<Button>(R.id.VisualizarBoton)
         val BotonAtras = findViewById<Button>(R.id.atras)
         val tablerosim = findViewById<TableLayout>(R.id.tablerosimulacion)
 
 
-
-/*
-
-        val timer = Timer()
-        // Crear un TimerTask
-        val task = object : TimerTask() {
-            override fun run() {
-
-                var iniciofilalocal = iniciofila
-                var iniciocolumnalocal = iniciocolumna
-
-
-                if (iniciofilalocal < tablerosim.childCount) {
-
-                    // Recorrer columnas en la fila actual
-                }else{
-                    iniciofilalocal = iniciofila
-                }
-                val row = tablerosim.getChildAt(iniciofilalocal) as TableRow
-
-                if (iniciocolumnalocal < row.childCount) {
-
-
-
-                }else{
-                    iniciofilalocal++
-                    iniciocolumnalocal = iniciocolumna
-                }
-                val cell = row.getChildAt(iniciocolumnalocal) as TextView
-
-                cell.setBackgroundColor(Color.parseColor("#000000"))
-
-                println("$iniciofilalocal $iniciocolumnalocal")
-                iniciocolumnalocal++
-
-            }
-        }
-        timer.schedule(task, 0, 100)
-*/
 
         val timer = Timer()
         // Crear un TimerTask
@@ -378,7 +1186,11 @@ class configuracionTablero() : AppCompatActivity() {
                             cell.setBackgroundColor(Color.parseColor("#000000"))
                         }
                     }
+
+
                     val aste = fusionmatriz
+
+
                     if (aste != null) {
                         var j = iniciofilalocal
                         var h = iniciofila
@@ -418,18 +1230,8 @@ class configuracionTablero() : AppCompatActivity() {
 
         }
 
-
-
-
-
         val mensaje = findViewById<EditText>(R.id.mensaje)
-/*
-        BotonJustificado.setOnClickListener {
-                BTS.outputStream.write(("*J~").toByteArray());
-
-        }
-        */
-
+        val mensaje2 = findViewById<EditText>(R.id.mensaje2)
 
         BotonReset.setOnClickListener {
             BTS.outputStream.write(("*R~").toByteArray());
@@ -437,7 +1239,94 @@ class configuracionTablero() : AppCompatActivity() {
         BotonGuardado.setOnClickListener {
             BTS.outputStream.write(("*W~").toByteArray());
         }
-        BotonMensaje.setOnClickListener {
+
+        BotonMensajeAbajo.setOnClickListener {
+            BTS.outputStream.write(("*N"+mensaje2.text+"~").toByteArray());
+
+            iniciofilalocal = iniciofila
+            iniciocolumnalocal = iniciocolumna
+
+            for (i in 0 until tablerosim.childCount) {
+                val row = tablerosim.getChildAt(i) as TableRow
+                // Recorrer columnas en la fila actual
+                for (j in 0 until row.childCount) {
+                    val cell = row.getChildAt(j) as TextView
+                    cell.setBackgroundColor(Color.parseColor("#000000"))
+
+                }
+            }
+
+            if(palabraUp.length !=0){
+                fusionmatriz = letras[palabraUp[0]]?.clone()
+
+
+                val palabrasub = palabraUp.substring(1)
+                if (fusionmatriz != null) {
+
+                    for(letracola in palabrasub){
+                        val filas = letras[letracola]?.clone()
+
+
+                        if (filas != null) {
+                            for(j in filas.indices){
+                                fusionmatriz!![j] += filas[j]
+                            }
+                        }
+
+                    }
+                }
+            }else{
+                fusionmatriz = letras[' ']?.clone()
+            }
+
+
+
+            palabraDDown = mensaje2.text.toString().uppercase()
+            if(palabraDDown.length != 0){
+                var fusionmatrizaux = letras[palabraDDown[0]]?.clone()
+
+                val palabradown = palabraDDown.substring(1)
+                if (fusionmatrizaux != null) {
+
+                    for(letracola in palabradown){
+                        val filas = letras[letracola]?.clone()
+
+
+                        if (filas != null) {
+                            for(j in filas.indices){
+                                fusionmatrizaux[j] += filas[j]
+                            }
+                        }
+
+                    }
+                    val filasCombinadas = fusionmatriz?.toMutableList()
+
+                    // Añadir las filas de la segunda matriz a la lista
+                    if (filasCombinadas != null) {
+                        filasCombinadas.addAll(fusionmatrizaux.clone())
+                        fusionmatriz = filasCombinadas.toTypedArray()
+                    }
+
+
+                }
+            }else{
+                val fusionmatrizaux = letras[' ']?.clone()
+                val filasCombinadas = fusionmatriz?.toMutableList()
+
+                // Añadir las filas de la segunda matriz a la lista
+                if (filasCombinadas != null) {
+                    if (fusionmatrizaux != null) {
+                        filasCombinadas.addAll(fusionmatrizaux.clone())
+                    }
+                    fusionmatriz = filasCombinadas.toTypedArray()
+                }
+            }
+
+
+
+        }
+
+        BotonMensajeArriba.setOnClickListener {
             BTS.outputStream.write(("*M"+mensaje.text+"~").toByteArray());
 
             iniciofilalocal = iniciofila
@@ -453,24 +1342,72 @@ class configuracionTablero() : AppCompatActivity() {
                 }
             }
 
+            palabraUp = mensaje.text.toString().uppercase()
+
+            if(palabraUp.length !=0){
+                fusionmatriz = letras[palabraUp[0]]?.clone()
 
 
-            var palabra = mensaje.text.toString().uppercase()
+                val palabrasub = palabraUp.substring(1)
+                if (fusionmatriz != null) {
 
-            fusionmatriz = letras[palabra[0]]?.clone()
-            val palabrasub = palabra.substring(1)
-            if (fusionmatriz != null) {
+                    for(letracola in palabrasub){
+                        val filas = letras[letracola]?.clone()
 
-                for(letracola in palabrasub){
-                    val filas = letras[letracola]?.clone()
-                    if (filas != null) {
-                        for(j in filas.indices){
-                            fusionmatriz!![j] += filas[j]
+
+                        if (filas != null) {
+                            for(j in filas.indices){
+                                fusionmatriz!![j] += filas[j]
+                            }
                         }
+
+                    }
+                }
+            }else{
+                fusionmatriz = letras[' ']?.clone()
+            }
+
+
+            if(palabraDDown.length != 0){
+                var fusionmatrizaux = letras[palabraDDown[0]]?.clone()
+
+                val palabradown = palabraDDown.substring(1)
+                if (fusionmatrizaux != null) {
+
+                    for(letracola in palabradown){
+                        val filas = letras[letracola]?.clone()
+
+
+                        if (filas != null) {
+                            for(j in filas.indices){
+                                fusionmatrizaux[j] += filas[j]
+                            }
+                        }
+
+                    }
+                    val filasCombinadas = fusionmatriz?.toMutableList()
+
+                    // Añadir las filas de la segunda matriz a la lista
+                    if (filasCombinadas != null) {
+                        filasCombinadas.addAll(fusionmatrizaux.clone())
+                        fusionmatriz = filasCombinadas.toTypedArray()
                     }
 
+
+                }
+            }else{
+                val fusionmatrizaux = letras[' ']?.clone()
+                val filasCombinadas = fusionmatriz?.toMutableList()
+
+                // Añadir las filas de la segunda matriz a la lista
+                if (filasCombinadas != null) {
+                    if (fusionmatrizaux != null) {
+                        filasCombinadas.addAll(fusionmatrizaux.clone())
+                    }
+                    fusionmatriz = filasCombinadas.toTypedArray()
                 }
             }
+
 
             val aste = fusionmatriz
             if (aste != null) {
@@ -493,72 +1430,6 @@ class configuracionTablero() : AppCompatActivity() {
                     h++
                 }
             }
-
-            /**
-            val iniciofilalocal = iniciofila
-            val iniciocolumnalocal = iniciocolumna
-
-            println(letras['A']?.get(0))
-            val aste = letras['A']
-
-            if (aste != null) {
-
-                var j = iniciofilalocal
-                var h = 0
-                while((j  < tablerosim.childCount) && h < aste.size){
-                    println(aste[h])
-                    val row = tablerosim.getChildAt(j) as TableRow
-                    var z = iniciocolumnalocal
-                    var i = 0
-                    while((z  < row.childCount) && i < aste[h].length){
-                        val cell = row.getChildAt(z) as TextView
-                        val lea = aste[h][i]
-                        if( lea == '*'){
-                            cell.setBackgroundColor(Color.parseColor("#ff0000"))
-                        }
-                        z++
-                        i++
-                    }
-                    j++
-                    h++
-                }
-            }*/
-            /**
-            if (iniciofila < tablerosim.childCount) {
-
-                // Recorrer columnas en la fila actual
-            }else{
-                iniciofila = 0
-            }
-            var row = tablerosim.getChildAt(iniciofila) as TableRow
-
-            if (iniciocolumna < row.childCount) {
-
-
-
-            }else{
-                iniciofila++
-                iniciocolumna = 0
-            }
-
-            row = tablerosim.getChildAt(iniciofila) as TableRow
-            val cell = row.getChildAt(iniciocolumna) as TextView
-
-            cell.setBackgroundColor(Color.parseColor("#000000"))
-
-            println("$iniciofila $iniciocolumna")
-            iniciocolumna++*/
-/**
-            for (i in iniciofila until tablerosim.childCount) {
-                val row = tablerosim.getChildAt(i) as TableRow
-                // Recorrer columnas en la fila actual
-                for (j in iniciocolumna until row.childCount) {
-                    val cell = row.getChildAt(j) as TextView
-                    cell.setBackgroundColor(Color.parseColor("#000000"))
-
-                }
-            }*/
-
         }
         BotonPredeterminado.setOnClickListener {
             BTS.outputStream.write(("*F~").toByteArray());
@@ -569,13 +1440,8 @@ class configuracionTablero() : AppCompatActivity() {
             BTS.outputStream.write(("*I~").toByteArray()); // *H~
         }
 
-        BotonmasBrillo.setOnClickListener {
-            BTS.outputStream.write(("*B1~").toByteArray());
-        }
 
-
-
-        rangoV.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{ // velocidad
+        rangoB.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{ // brillo
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
@@ -587,9 +1453,9 @@ class configuracionTablero() : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 if (seekBar != null) {
-                    valorVelocidad.text = ((seekBar.progress*3000)/100).toString()
-                    val num:Int = (seekBar.progress*3000)/100;
-                    BTS.outputStream.write(("*P"+(num).toString()+"~").toByteArray());
+                    valorBrillo.text = ((seekBar.progress*15)/100).toString()
+                    val num:Int = (seekBar.progress*15)/100;
+                    BTS.outputStream.write(("*B"+(num).toString()+"~").toByteArray());
                 }
             }
         })

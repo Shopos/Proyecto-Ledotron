@@ -3680,22 +3680,37 @@
                 android:layout_marginBottom="20dp"
                 android:text="Fila Inferior" />
 
-            <TextView
-                android:textStyle="bold"
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="@string/posicion_texto" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:id="@+id/BrilloTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="brillo" />
+
+                <TextView
+                    android:id="@+id/BrilloNumero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="" />
+
+            </LinearLayout>
 
 
-
-            <Button
-                android:backgroundTint="#9999CC"
-                android:id="@+id/brilloBoton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="@string/brillo1" />
+            <SeekBar
+                android:id="@+id/BrilloSB"
+                android:layout_width="299dp"
+                android:layout_height="17dp"
+                android:layout_marginBottom="20dp" />
 
 
             <LinearLayout
@@ -3728,37 +3743,6 @@
                 android:layout_marginBottom="20dp" />
 
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:textStyle="bold"
-                    android:id="@+id/velocidadTitulo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/velocidad_de_escritura" />
-
-                <TextView
-                    android:id="@+id/velocidadNumero"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="" />
-
-
-            </LinearLayout>
-
-
-            <SeekBar
-                android:id="@+id/VelocidadSB"
-                android:layout_width="302dp"
-                android:layout_height="17dp"
-                android:layout_marginBottom="10dp" />
-
             <Button
                 android:id="@+id/estiloBoton"
                 android:layout_width="wrap_content"
@@ -3766,7 +3750,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
 
-                android:text="@string/cambiar_estilo" />
+                android:text="cambiar tamano" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
