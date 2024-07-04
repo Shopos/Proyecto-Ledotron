@@ -52,34 +52,26 @@ class opcionbluetooth : AppCompatActivity() {
             val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
             val bta = bluetoothManager.adapter as BluetoothAdapter
             val btnEna =  Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            
+            botonconfig.isEnabled = true
 
             PedirPermiso(listaNombreBT,listaDireccionesBT,listaSpinner,bta)
 
             botonconfig.setOnClickListener{
+                botonconfig.isEnabled = false
                 CoroutineScope(Dispatchers.Main).launch {
                     try {
                         PedirPermisoVincular(listaDireccionesBT, listaSpinner, bta)
                         val intent = Intent(this@opcionbluetooth,configuracionTablero::class.java)
                         intent.putExtra("valor", listaDireccionesBT.getItem(listaSpinner.selectedItemPosition));
-                        Toast.makeText(this@opcionbluetooth,"se ha podido conectar", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this@opcionbluetooth,"se ha podido conectar", Toast.LENGTH_SHORT).show()
                         startActivity(intent)
 
                     } catch (e: Exception) {
-                        Toast.makeText(this@opcionbluetooth, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                        botonconfig.isEnabled = true
+                        //Toast.makeText(this@opcionbluetooth, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
 
                     }
                 }
-
-                PedirPermisoVincular(listaDireccionesBT,listaSpinner,bta)
-
-
-                val intent = Intent(this, configuracionTablero::class.java)
-
-                intent.putExtra("valor", listaDireccionesBT.getItem(listaSpinner.selectedItemPosition));
-                startActivity(intent)
-
-
             }
 
         }
@@ -109,22 +101,17 @@ class opcionbluetooth : AppCompatActivity() {
             }else{
                 //permiso aceptado
                 if(!bta.bondedDevices.isEmpty()){
-                    try {
-                        val ui: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-                        //val BTS:BluetoothSocket
-                        Toast.makeText(this,"se ha podido conectar",Toast.LENGTH_SHORT).show()
-                        val instalacion: BluetoothDevice = bta.getRemoteDevice(listaDireccionesBT.getItem(ListaBT.selectedItemPosition))
+                    val ui: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+                    //val BTS:BluetoothSocket
 
-                        BTS =  instalacion.createRfcommSocketToServiceRecord(ui)
-                        BTS.connect()
-                        Toast.makeText(this,"paso", Toast.LENGTH_SHORT).show()
-                        BluetoothSingle.initialize(BTS)
+                    val instalacion: BluetoothDevice = bta.getRemoteDevice(listaDireccionesBT.getItem(ListaBT.selectedItemPosition))
 
-                    }catch (e:Exception){
-                        Toast.makeText(this,"no se ha podido conectar",Toast.LENGTH_SHORT).show()
+                    BTS =  instalacion.createRfcommSocketToServiceRecord(ui)
+                    BTS.connect()
+                    Toast.makeText(this,"paso", Toast.LENGTH_SHORT).show()
+                    BluetoothSingle.initialize(BTS)
 
-                    }
-
+                    Toast.makeText(this,"se ha podido conectar",Toast.LENGTH_SHORT).show()
                 }
             }
         }
