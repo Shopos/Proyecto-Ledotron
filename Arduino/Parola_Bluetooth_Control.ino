@@ -23,8 +23,8 @@
 #define NUM_ZONES 2
 #define ZONE_SIZE 4
 #define MAX_DEVICES (NUM_ZONES * ZONE_SIZE)
-#define CLK_PIN   10
-#define DATA_PIN  12
+#define CLK_PIN   12
+#define DATA_PIN  10
 #define CS_PIN    11
 
 #define ZONE_UPPER  1
@@ -37,8 +37,8 @@
 
 // Bluetooth Serial interface ---------
 // Bluetooth Serial comms pins and parameters
-const uint8_t BT_RECV_PIN = 0;   // Arduino receive -> Bluetooth TxD pin
-const uint8_t BT_SEND_PIN = 1;   // Arduino send -> Bluetooth RxD pin
+const uint8_t BT_RECV_PIN = 2;   // Arduino receive -> Bluetooth TxD pin
+const uint8_t BT_SEND_PIN = 3;   // Arduino send -> Bluetooth RxD pin
 const char BT_NAME[] = "LEDotron";
 
 // Define the type of hardware being used.
@@ -94,16 +94,23 @@ const char PKT_CMD_BRIGHT  = 'B'; // Toggle 0-15
 const char PKT_CMD_RESET   = 'R'; // Reset the Arduino hardware
 const char PKT_CMD_FACSET  = 'F'; // Factory settings
 const char PKT_CMD_SAVE    = 'W'; // Write current setup to EEPROM
+
 const char PKT_CMD_MESSAGE = 'M'; // Displayed message
-const char PKT_CMD_BMESSAGE = 'N'; //
+const char PKT_CMD_BMESSAGE = 'N'; // Displayed Bottom Message
+const char PKT_CMD_HEIGHT = 'H'; // Toggle Height normal - double
+
+
+
+
+
+
 const char PKT_CMD_JUSTIFY = 'J'; // Toggle L, C, R
 const char PKT_CMD_INVERT  = 'V'; // Toggle Invert/Normal
 const char PKT_CMD_TPAUSE  = 'P'; // number (ms delay between in and out)
 const char PKT_CMD_IANIM   = 'I'; // In Animation - toggle through Animations table
 const char PKT_CMD_OANIM   = 'O'; // Out animation - toggle through Animations table
-
 const char PKT_CMD_SCROLL = 'T'; // Toggle SCROLLING - ZONETEXT
-const char PKT_CMD_HEIGHT = 'H'; // Toggle Height normal - double
+
 
 const char PKT_CMD_ACK  = 'Z';  // Acknowledge command - data is PKT_ERR_* defines
 const char PKT_ERR_OK   = '0';  // no error/ok
@@ -192,7 +199,7 @@ struct globalData {
   char bottomMsg[BUF_SIZE+1];
 } G;
 
-
+bool doubleHeight = false;
 
 // Global message buffers shared by BT and Scrolling functions
 char newMessage[BUF_SIZE+1] = { '\0' };
@@ -203,7 +210,9 @@ bool newBMessageAvailable = false;
 
 bool newConfigAvailable = false;
 
-bool newHeightAvailable = false;
+
+char messageToShow[BUF_SIZE+1];
+char messageBToShow[BUF_SIZE+1];
 
 // Application Code ------------------
 void(*hwReset) (void) = 0; //declare reset function @ address 0
@@ -219,6 +228,8 @@ void readGlobal(bool bInit = false)
   PRINTS("\nLoading Global");
   EEPROM.get(EEPROM_START_ADDR, G);
 
+  
+
   if (bInit || G.signature[0] != SIG0 || G.signature[1] != SIG1)
   // set the default parameters
   {
@@ -229,14 +240,17 @@ void readGlobal(bool bInit = false)
     G.scrollPause = 10;
     G.effectI = G.effectO = PA_SCROLL_LEFT;
     G.align = 1;
-    G.intensity = 7;
+    G.intensity = 0;
     G.bInvert = false;
-    G.doubleH = false;
-    strcpy(G.msg, "Main text");
-    strcpy(G.bottomMsg, "Secondary text");
+    G.doubleH = true;
+    strcpy(G.msg, "Esperando");
+    strcpy(G.bottomMsg, "Mensaje");
 
     writeGlobal();
   }
+
+  fillText(G.msg, G.bottomMsg);
+  setTextAnimation();
 
   newConfigAvailable = true;
 }
@@ -368,7 +382,7 @@ uint8_t BT_executeCommand(uint8_t cmd, char *pd)
     break;
 
   case PKT_CMD_BRIGHT:
-    G.intensity = (G.intensity + 1) % (MAX_INTENSITY + 1);
+    G.intensity = atoi(pd);
     PRINT("\nCMD Brightness ", G.intensity);
     break;
 
@@ -434,12 +448,10 @@ uint8_t BT_executeCommand(uint8_t cmd, char *pd)
   case PKT_CMD_HEIGHT:
     G.doubleH = !G.doubleH;
 
-    // setTextAnimation();
-    PRINTS("\nSize changed");
-
     setTextAnimation();
-    
-    // newHeightAvailable = true;
+
+    newConfigAvailable = true;
+    P.displayReset();
     break;
 
   default:
@@ -449,7 +461,7 @@ uint8_t BT_executeCommand(uint8_t cmd, char *pd)
   }
 
   // set global flags
-  newConfigAvailable = (sts == PKT_ERR_OK && cmd != PKT_CMD_MESSAGE && cmd != PKT_CMD_BMESSAGE);
+  newConfigAvailable = (sts == PKT_ERR_OK && cmd != PKT_CMD_MESSAGE);
 
   return(sts);
 }
@@ -553,12 +565,13 @@ void BT_getCommand(void)
 
     default:  // something screwed up - reset the FSM
       state = ST_IDLE;
-      PRINTS("\nSomething screwed up");
       BT_sendACK(PKT_ERR_SEQ);
       break;
     }
   }
 }
+
+
 
 void setup()
 {
@@ -571,9 +584,13 @@ void setup()
 
   P.begin(NUM_ZONES);
   setTextAnimation();
+  
   P.displayClear();
   
   BT_begin();
+
+  
+  
 
 
   invertUpperZone = (HARDWARE_TYPE == MD_MAX72XX::GENERIC_HW || HARDWARE_TYPE == MD_MAX72XX::PAROLA_HW);
@@ -601,8 +618,6 @@ void setup()
 
 void loop()
 {
-
-  
   // get the next thing from the BT channel
   BT_getCommand();
 
@@ -621,11 +636,7 @@ void loop()
     P.setIntensity(G.intensity);
     P.setInvert(G.bInvert);
 
-    PRINT("\nEEPROM lenght ", EEPROM.length());
-    PRINT("\nSIZE OF G", sizeof(G));
-  
 
-    P.displayClear();
     P.displayReset();
     newConfigAvailable = false;
   }
@@ -633,7 +644,10 @@ void loop()
   // if we have a new message, copy it over
   if (newMessageAvailable){
     PRINTS("\nSetting new message");
+
     strcpy(G.msg, newMessage);
+
+    fillText(G.msg, G.bottomMsg);
 
     setTextAnimation();
     P.displayReset();
@@ -643,13 +657,21 @@ void loop()
 
   if (newBMessageAvailable){
     PRINTS("\nSetting new message");
+
+    uint8_t spaces = 0;
+    int i;
+
     strcpy(G.bottomMsg, newBMessage);
+
+    fillText(G.msg, G.bottomMsg);
 
     setTextAnimation();
     P.displayReset();
     
     newBMessageAvailable = false;
   }
+
+
 
   // keep the animation going in all cases
   if (P.displayAnimate())
@@ -658,12 +680,41 @@ void loop()
 }
 
 
+void fillText(char *text1, char *text2){
+
+  strcpy(messageToShow, G.msg);
+  strcpy(messageBToShow, G.bottomMsg);
+
+  uint8_t spaces = 0;
+  int i;
+
+  if (strlen(text1) > 0 && strlen(text1) < strlen(text2)) {
+    spaces = strlen(text2) - strlen(text1);
+
+
+    for(i = strlen(text1); i < BUF_SIZE && spaces > 0; i++){
+      messageToShow[i] = '_';
+      spaces--;
+    }
+
+    messageToShow[i] = '\0';
+    messageToShow[BUF_SIZE] = '\0';
+
+  }else if(strlen(text1) > 0 && strlen(text1) > strlen(text2)){
+    spaces = strlen(text1) - strlen(text2);
+
+    for(i = strlen(text2); i < BUF_SIZE && spaces > 0; i++){
+      messageBToShow[i] = '_';
+      spaces--;
+    }
+
+    messageBToShow[i] = '\0';
+    messageBToShow[BUF_SIZE] = '\0';
+  }
+}
+
 void setTextAnimation() {
   
-  P.displayClear();
-  P.displayReset();
-  P.synchZoneStart();
-
   if (G.doubleH) {
     displayDoubleHeightText(G.msg);
   } else {
@@ -673,8 +724,8 @@ void setTextAnimation() {
     P.setFont(nullptr);
     P.setCharSpacing(1);
 
-    P.displayZoneText(ZONE_LOWER, G.bottomMsg, PA_CENTER, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT); // We use only the left scroll for simplicity and to avoid errors
-    P.displayZoneText(ZONE_UPPER, G.msg, PA_CENTER, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT); // idem
+    P.displayZoneText(ZONE_LOWER, messageBToShow, G.align, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT); // We use only the left scroll for simplicity and to avoid errors
+    P.displayZoneText(ZONE_UPPER, messageToShow, G.align, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT); // idem
 
     // if (scrolling) {
     //} else {
@@ -682,12 +733,13 @@ void setTextAnimation() {
     //}
   }
 
-  
+  P.displayClear();
+  P.displayReset();
 }
 
 void displayDoubleHeightText(const char* msg) {
-  char upperMsg[256];
-  char lowerMsg[256];
+  char upperMsg[BUF_SIZE+1];
+  char lowerMsg[BUF_SIZE+1];
 
   // Generar el mensaje para la parte superior e inferior
   for (int i = 0; i < strlen(msg); i++) {
@@ -703,7 +755,7 @@ void displayDoubleHeightText(const char* msg) {
   P.setZone(ZONE_UPPER, ZONE_SIZE, MAX_DEVICES - 1);
 
   P.setFont(BigFont);
-  P.setCharSpacing(1);
+  P.setCharSpacing(2);
 
   if (invertUpperZone)
   {
@@ -714,8 +766,8 @@ void displayDoubleHeightText(const char* msg) {
   P.displayClear(ZONE_LOWER);
   P.displayClear(ZONE_UPPER);
 
-  P.displayZoneText(ZONE_LOWER, lowerMsg, PA_CENTER, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
-  P.displayZoneText(ZONE_UPPER, upperMsg, PA_CENTER, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
+  P.displayZoneText(ZONE_LOWER, lowerMsg, G.align, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
+  P.displayZoneText(ZONE_UPPER, upperMsg, G.align, G.scrollSpeed, G.scrollPause, PA_SCROLL_LEFT, PA_SCROLL_LEFT);
 
   P.synchZoneStart();
 }
