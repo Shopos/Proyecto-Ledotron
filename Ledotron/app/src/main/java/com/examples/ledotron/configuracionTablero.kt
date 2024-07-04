@@ -25,8 +25,12 @@ import android.widget.TableRow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.Timer
 import java.util.TimerTask
@@ -1142,14 +1146,7 @@ class configuracionTablero() : AppCompatActivity() {
         setContentView(R.layout.configuraciontablero)
 
 
-
-        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-
-
-        val bta = bluetoothManager.adapter as BluetoothAdapter
-        val btnEna =  Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        PedirPermisoVincular(intent.getStringExtra("valor").toString(),bta)
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
 
         val rangoT = findViewById<SeekBar>(R.id.TransicionSB)
@@ -1239,14 +1236,44 @@ class configuracionTablero() : AppCompatActivity() {
         val mensaje2 = findViewById<EditText>(R.id.mensaje2)
 
         BotonReset.setOnClickListener {
-            BTS.outputStream.write(("*R~").toByteArray());
+
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    BluetoothSingle.GetSocket().outputStream.write(("*R~").toByteArray());
+                } catch (e: Exception) {
+                    Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                    startActivity(intent)
+
+                }
+            }
         }
         BotonGuardado.setOnClickListener {
-            BTS.outputStream.write(("*W~").toByteArray());
+
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    BluetoothSingle.GetSocket().outputStream.write(("*W~").toByteArray())
+                } catch (e: Exception) {
+                    Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                    startActivity(intent)
+
+                }
+            }
         }
 
         BotonMensajeAbajo.setOnClickListener {
-            BTS.outputStream.write(("*N"+mensaje2.text+"~").toByteArray());
+
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    BluetoothSingle.GetSocket().outputStream.write(("*N"+mensaje2.text+"~").toByteArray());
+                } catch (e: Exception) {
+                    Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                    startActivity(intent)
+
+                }
+            }
 
             iniciofilalocal = iniciofila
             iniciocolumnalocal = iniciocolumna
@@ -1334,7 +1361,16 @@ class configuracionTablero() : AppCompatActivity() {
         }
 
         BotonMensajeArriba.setOnClickListener {
-            BTS.outputStream.write(("*M"+mensaje.text+"~").toByteArray());
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    BluetoothSingle.GetSocket().outputStream.write(("*M"+mensaje.text+"~").toByteArray());
+                } catch (e: Exception) {
+                    Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                    startActivity(intent)
+
+                }
+            }
 
             iniciofilalocal = iniciofila
             iniciocolumnalocal = iniciocolumna
@@ -1439,17 +1475,33 @@ class configuracionTablero() : AppCompatActivity() {
             }
         }
         BotonPredeterminado.setOnClickListener {
-            BTS.outputStream.write(("*F~").toByteArray());
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    BluetoothSingle.GetSocket().outputStream.write(("*F~").toByteArray());
+                } catch (e: Exception) {
+                    Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                    startActivity(intent)
+
+                }
+            }
         }
 
 
         BotonEstilo.setOnClickListener {
-            BTS.outputStream.write(("*H~").toByteArray()); // *H~
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    BluetoothSingle.GetSocket().outputStream.write(("*H~").toByteArray());
+                } catch (e: Exception) {
+                    Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                    startActivity(intent)
+
+                }
+            }
 
             if(palabraUp.length !=0){
                 fusionmatriz = letrasM[palabraUp[0]]?.clone()
-
-
                 val palabrasub = palabraUp.substring(1)
                 if (fusionmatriz != null) {
 
@@ -1487,7 +1539,17 @@ class configuracionTablero() : AppCompatActivity() {
                 if (seekBar != null) {
                     valorBrillo.text = ((seekBar.progress*15)/100).toString()
                     val num:Int = (seekBar.progress*15)/100;
-                    BTS.outputStream.write(("*B"+(num).toString()+"~").toByteArray());
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try {
+                            BluetoothSingle.GetSocket().outputStream.write(("*B"+(num).toString()+"~").toByteArray());
+                        } catch (e: Exception) {
+                            Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                            startActivity(intent)
+
+                        }
+                    }
                 }
             }
         })
@@ -1507,7 +1569,17 @@ class configuracionTablero() : AppCompatActivity() {
                     valorTransicion.text = ((seekBar.progress*500)/100).toString()
                     val num:Int = (seekBar.progress*500)/100;
 
-                    BTS.outputStream.write(("*S"+((num).toString()+"~")).toByteArray());
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try {
+                            BluetoothSingle.GetSocket().outputStream.write(("*S"+((num).toString()+"~")).toByteArray());
+                        } catch (e: Exception) {
+                            Toast.makeText(this@configuracionTablero, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@configuracionTablero, opcionbluetooth::class.java)
+                            startActivity(intent)
+
+                        }
+                    }
                 }
             }
         })

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.inicio)
         //accion de boton para abrir otra ventana
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         val launchButton = findViewById<Button>(R.id.iniciar)
         launchButton.setOnClickListener{

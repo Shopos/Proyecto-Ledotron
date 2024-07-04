@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
@@ -25,6 +26,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.examples.ledotron.databinding.ActivityMain2Binding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 class opcionbluetooth : AppCompatActivity() {
@@ -32,7 +36,7 @@ class opcionbluetooth : AppCompatActivity() {
         lateinit var BTS: BluetoothSocket
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             setContentView(R.layout.opcionbluetooth)
 
 
@@ -53,6 +57,21 @@ class opcionbluetooth : AppCompatActivity() {
             PedirPermiso(listaNombreBT,listaDireccionesBT,listaSpinner,bta)
 
             botonconfig.setOnClickListener{
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        PedirPermisoVincular(listaDireccionesBT, listaSpinner, bta)
+                        val intent = Intent(this@opcionbluetooth,configuracionTablero::class.java)
+                        intent.putExtra("valor", listaDireccionesBT.getItem(listaSpinner.selectedItemPosition));
+                        Toast.makeText(this@opcionbluetooth,"se ha podido conectar", Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
+
+                    } catch (e: Exception) {
+                        Toast.makeText(this@opcionbluetooth, "no se ha podido conectar", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+                PedirPermisoVincular(listaDireccionesBT,listaSpinner,bta)
 
 
                 val intent = Intent(this, configuracionTablero::class.java)
@@ -95,8 +114,11 @@ class opcionbluetooth : AppCompatActivity() {
                         //val BTS:BluetoothSocket
                         Toast.makeText(this,"se ha podido conectar",Toast.LENGTH_SHORT).show()
                         val instalacion: BluetoothDevice = bta.getRemoteDevice(listaDireccionesBT.getItem(ListaBT.selectedItemPosition))
+
                         BTS =  instalacion.createRfcommSocketToServiceRecord(ui)
                         BTS.connect()
+                        Toast.makeText(this,"paso", Toast.LENGTH_SHORT).show()
+                        BluetoothSingle.initialize(BTS)
 
                     }catch (e:Exception){
                         Toast.makeText(this,"no se ha podido conectar",Toast.LENGTH_SHORT).show()

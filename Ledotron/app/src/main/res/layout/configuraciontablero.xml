@@ -3661,7 +3661,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="Fila superior" />
+                android:text="Agregar Texto superior" />
 
 
             <EditText
@@ -3678,7 +3678,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="Fila Inferior" />
+                android:text="Agregar Texto inferior" />
 
 
 
